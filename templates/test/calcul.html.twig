@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <p>La somme de {{a}} et {{b}} est égale à {{ a + b }} </p>
+
+    <p>{{a}} - {{b}} = {{ a - b }}</p>
+    <p>{{a}} x {{b}} = {{ a * b }}</p>
+
+    {% if b == 0 %}
+        <p class="alert alert-danger">Division par 0 impossible</p>
+    {% else %}
+        <p>{{a}} / {{b}} = {{ a / b }}</p>
+    {% endif %}
+
+{% endblock %}
+
+{# exo : Quand b est égale à 0 afficher "Division par 0 impossible" sinon afficher le résultat de la division #}
+

@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <p>Dans Twig, on va pouvoir faire de l'affichage conditionnel. Comme en PHP, la balise conditionnelle s'appelle <code>if</code>
+    </p>
+{% if a <= 5 %}
+    <p>La variable "a" est inférieure ou égale à 5</p>
+{% else %}
+    <p>La variable a x 2 vaut {{ a * 2 }} </p>
+{% endif %}
+
+{% endblock %}

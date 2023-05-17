@@ -1,0 +1,106 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<p>Lorsque l'on veut répéter plusieurs dois le même affichage,  comme en PHP, on peut utiliser la balise FOR</p>
+<p>Syntaxe : <code>&#123;% for i in debut..fin %&#125;</code></p>
+
+{% for i in 1..100 %}
+{{i}} -
+{# on a enlevé le <p></p> pour que ça affiche en ligne, et on a ajouté un tiret #}
+{% endfor %}
+
+{# exo : Afficher tous les nombres de 12 à 25 multipliés par 2 #}
+<hr>
+<p>Dans une boucle Twig, une variable nommée <code>loop</code> permet d'avoir des informations sur l'itération (=le tour) en cours.</p>
+<p>Par exemple : <code>loop.last</code> est un booléen qui vaut <code>true</code> au dernier tour de la boucle</p>
+
+{% for i in 12..25 %}
+{{ i * 2 }} {% if not loop.last %} - {% endif %}
+{% if loop.first %} <br> {% endif %}
+
+{# not : opérateur booléen pour dire "false" #}
+{# Maintenant le dernier tiret n'est pas affiché #}
+
+{% endfor %}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <th>n</th>
+        <th>n²</th>
+    </thead>
+{% for i in 1..10 %}
+    {# <tr>
+        {% if loop.first %}
+        <td class="bg-danger">{{i}}</td>
+        {% else %}
+        <td>{{i}}</td>
+        {% endif %}
+        <td>{{i * i}}</td>
+    </tr> #}
+
+        <tr>
+        {# <td class={% if loop.first %}"bg-danger"{% endif %}>{{i}}</td> #}
+        <td class={{ loop.first ? "bg-danger" : ""}}>{{i}}</td>
+        {# Opérateur/condition ternaire (=sur une seule ligne); si la condition est vraie, alors ce qui est après ?; si c'est faux, voir après deux points. #}
+        <td>{{i * i}}</td>
+    </tr>
+
+{% endfor %}
+</table>
+
+<hr>
+{% for caractere in "A".."z" %}
+{# attention, il y a une différence entre majuscule et minuscule, après maj y a d'autres caractères #}
+    {{ caractere }}
+{% endfor %}
+
+<hr>
+<p>2 <sup>ième</sup> valeur du tableau : {{tableau[1]}}</p>
+<p>Taille d'un tableau : filtre TWIG <code>length</code></p>
+<p>Dans TWIG, les filtres sont des fonctions qui s'utilisent avec une syntaxe particulière  <code>valeur|filtre</code>. Le filtre va s'appliquer sur la valeur avant le |</p>
+<p>Taille : {{tableau|length}}</p>
+
+{# exo : Afficher toutes les valeurs de la variable tableau #}
+
+<hr>
+
+{% for i in 0..tableau|length - 1 %}
+    {{tableau[i]}}
+{% endfor %}
+
+<hr>
+
+{# en PHP:
+foreach($tableau as $mot) {
+    echo $mot;
+}
+ #}
+{% for mot in tableau %}
+    {{mot}}
+{% endfor %}
+
+<hr>
+
+{# en PHP:
+foreach($tableau as $indice => $mot) {
+    echo $indice . " " . $mot;
+}
+ #}
+
+{% for indice, mot in tableau %}
+    {{indice}} : {{mot}} <br>
+{% endfor %}
+
+<hr>
+
+<p>Le prénom de la personne est {{personne["prenom"]}}</p>
+<ul>
+{% for indice, mot in personne %}
+    <li>{{indice}} : {{mot}}</li>
+{% endfor %}
+</ul>
+<p>Le nom de la personne est {{personne.nom}}</p>
+{# personne c'est un tableau, mais on fait comme si c'était un objet : personne.propriété #}
+
+{% endblock %}

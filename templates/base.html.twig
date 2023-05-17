@@ -6,6 +6,7 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
@@ -14,6 +15,33 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container">
+            <h1 class="titre">Bienvenue</h1>
+            {% block body %}
+                <p>ceci est le contenu du fichier <i>base.html.twig</i></p>
+            {% endblock %}
+        
+            <footer style="background-color: lightgray;">
+                {% block footer %}
+                    Ceci est le footer de base.html.twig
+                {% endblock %}
+            </footer>
+        </div>
     </body>
 </html>
+
+{# Commentaire en TWIG #}
+{# 
+    {% nomBalise ... %} : balises twig, presque toujours avec une balise fermante {% endNomBalise %}
+        avec nomBalise qui peut être :
+            block, for, if, extends, ... 
+    {{ ... }} : balises twig équivalentes à la balise PHP echo <?= ... ?>
+
+    --------------
+    Héritage : Un fichier qui hérite d'un autre fichier Twig commence par la balise 'extends'
+        {% extends 'nom_du_template_parent' %}
+    - quand un fichier hérite d'un autre fichier, le contenu de ses balises 'block' remplacera le contenu des balises 'block' du fichier parent, ayant le même nom
+    - ⚠️IMPORTANT⚠️
+        dans une vue (fichier-template Twig) qui hérite, on NE PEUT METTRE DU CONTENU QUE DANS UN 'block'
+
+ #}
