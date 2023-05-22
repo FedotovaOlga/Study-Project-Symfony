@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<table class="table">
+    <thead class="table-dark">
+        <th>Indice</th>
+        <th>Valeur</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Nom</td>
+        <td>{{personne.nom}}</td>
+    </tr>
+        <tr>
+        <td>Prénom</td>
+        <td>{{personne.prenom}}</td>
+    </tr>
+        <tr>
+        <td>Age</td>
+        <td>{{personne.age}}</td>
+    </tr>
+</tbody>
+</table>
+
+
+
+
+
+{% endblock %}

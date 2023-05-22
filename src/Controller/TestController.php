@@ -17,11 +17,11 @@ class TestController extends AbstractController // héritage
     public function index(): Response // ça veut dire que la méthode index() renvoit un objet de la classe Response importée plus haut avec "use" (donc la class TestControlleur contient une méthode qui renvoit un objet d'une autre class)
     {
         return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
+            'controller_name' => 'everybody',
         ]);
     }
 
-    #[Route('/affiche')]
+    #[Route('/affiche', name:"app_test_affiche")] // maintenant à la place de /affiche et /test(plus haut) on peut mettre tout ce qu'on veut, faut juste rafraichir la page, en étant sur une autre page, pour que ça recréé les liens
     public function affiche()
     {
         return $this->render("base.html.twig");
@@ -73,9 +73,29 @@ class TestController extends AbstractController // héritage
             "prenom" => "Jean",
             "age" => 99
         ];
-        return $this->render("test/boucles.html.twig",[
+        return $this->render("test/boucles.html.twig",
+        [
             "tableau" => $array,
             "personne" =>$tab
-    ]);
+        ]);
     }
+
+    #[Route("/test/objet")]
+    public function objet()
+    {
+        $personne = new \stdClass; // c'est une class PHP qui permet de créer un objet sans avoir à définir une class
+        // \ backslash c'est pour sortir du "namespace (chemin pour accéder à une class)"; sinon il va chercher la class stdClass dans namespace App\Controller (et ne va pas la trouver)
+        $personne->nom = "Onym";
+        $personne->prenom = "Anne";
+        $personne->age = "35";
+        $tab = [
+            "nom" => "Cérien",
+            "prenom" => "Jean",
+            "age" => 99
+        ];
+        // ça va marcher aussi avec $tab dans le fichier twig c'est toujours pareil (personne.nom) peu importe tableau ou objet
+    
+        return $this->render("test/objet.html.twig", ["personne" => $personne]);
+    }
+
 }

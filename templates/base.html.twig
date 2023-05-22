@@ -16,6 +16,16 @@
     </head>
     <body>
         <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_test') }}">page test</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_test_affiche') }}">page affiche</a>
+                    </li>
+                </ul>
+            </nav>
             <h1 class="titre">Bienvenue</h1>
             {% block body %}
                 <p>ceci est le contenu du fichier <i>base.html.twig</i></p>
